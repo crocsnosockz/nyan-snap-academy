@@ -23,75 +23,185 @@
  *
  */
 
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
 
-// This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
+let cars = [
+  {
+    model: "Tesla Model Y",
+    msrp: 48990,
+    range: 327,
+    seats: 5,
+    image: "images/modely.png"
+  },
+  {
+    model: "Tesla Model 3",
+    msrp: 42490,
+    range: 363,
+    seats: 5,
+    image: "images/model3.png"
+  },
+  {
+    model: "Ford Mustang Mach-E",
+    msrp: 36495,
+    range: 320,
+    seats: 5,
+    image: "images/mache.png"
+  },
+  {
+    model: "Acura ZDX",
+    msrp: 64500,
+    range: 313,
+    seats: 5,
+    image: "images/zdx.png"
+  },
+  {
+    model: "Cadillac Lyriq",
+    msrp: 58595,
+    range: 326,
+    seats: 5,
+    image: "images/lyriq.png"
+  },
+  {
+    model: "Cadillac Vistiq",
+    msrp: 77395,
+    range: 305,
+    seats: 7,
+    image: "images/vistiq.png"
+  },
+  {
+    model: "Cadillac Optiq",
+    msrp: 52895,
+    range: 302,
+    seats: 5,
+    image: "images/optiq.png"
+  }, {
+    model: "Chevrolet Blazer EV",
+    msrp: 44600,
+    range: 334,
+    seats: 5,
+    image: "images/blazerev.png"
+  },
+  {
+    model: "Chevrolet Equinox EV",
+    msrp: 33600,
+    range: 319,
+    seats: 5,
+    image: "images/equinox.png"
+  },
+  {
+    model: "Chevrolet Silverado EV",
+    msrp: 73100,
+    range: 460,
+    seats: 5,
+    image: "images/silveradoev.png"
+  },
+  {
+    model: "Ford F-150 Lightning",
+    msrp: 62995,
+    range: 320,
+    seats: 5,
+    image: "images/f150.png"
+  },
+  {
+    model: "Honda Prologue",
+    msrp: 47400,
+    range: 308,
+    seats: 5,
+    image: "images/prologue.png"
+  },
+  {
+    model: "Tesla Cybertruck",
+    msrp: 69990,
+    range: 350,
+    seats: 5,
+    image: "images/cybertruck.png"
+  },
+  {
+    model: "Genesis Electrified GV70",
+    msrp: 66950,
+    range: 236,
+    seats: 5,
+    image: "images/gv70.png"
+  },
+  {
+    model: "Kia EV6",
+    msrp: 42600,
+    range: 319,
+    seats: 5,
+    image: "images/ev6.png"
+  },
+  {
+    model: "Kia EV9",
+    msrp: 54900,
+    range: 304,
+    seats: 7,
+    image: "images/ev9.png"
+  },
+  {
+    model: "Jeep Wagoneer S",
+    msrp: 65200,
+    range: 300,
+    seats: 7,
+    image: "images/wagoneer.png"
+  },
+  {
+    model: "Chrysler Pacifica PHEV",
+    msrp: 51055,
+    range: 33,
+    seats: 8,
+    image: "images/pacifica.png"
+  }
 ];
-// Your final submission should have much more data than this, and
-// you should use more than just an array of strings to store it all.
 
-// This function adds cards the page to display the data in the array
 function showCards() {
   const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
+  cardContainer.innerHTML = "";                       // clear any existing cards
   const templateCard = document.querySelector(".card");
-
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
-
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
-    }
-
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
-    cardContainer.appendChild(nextCard); // Add new card to the container
+  for (let i = 0; i < cars.length; i++) {
+    const car = cars[i];
+    const nextCard = templateCard.cloneNode(true);    // copy the hidden template
+    editCardContent(nextCard, car);                   // fill it with car data
+    cardContainer.appendChild(nextCard);              // add the card to the page
   }
 }
 
-function editCardContent(card, newTitle, newImageURL) {
-  card.style.display = "block";
+function editCardContent(card, carData) {
+  card.style.display = "block";  // make the cloned card visible
 
-  const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
+  // Set the title
+  card.querySelector("h2").textContent = carData.model;
 
+  // Set the image source and alt text
   const cardImage = card.querySelector("img");
-  cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
+  cardImage.src = carData.image;
+  cardImage.alt = carData.model + " Photo";
 
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
+  // Set the bullet points
+  const bulletPoints = card.querySelectorAll("li");
+  bulletPoints[0].textContent = "Starting MSRP: $" + carData.msrp;
+  bulletPoints[1].textContent = "Range: " + carData.range + " miles";
+  bulletPoints[2].textContent = "Maximum Capacity: " + carData.seats;
 }
-
 // This calls the addCards() function when the page is first loaded
 document.addEventListener("DOMContentLoaded", showCards);
 
-function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!"
-  );
+
+// Sort functions 
+function sortByPrice() {
+  cars.sort((a, b) => a.msrp - b.msrp);
+  showCards();
 }
 
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
+function sortByRange() {
+  cars.sort((a, b) => b.range - a.range);
+  showCards();
+}
+
+function sortBySeats() {
+  cars.sort((a, b) => b.seats - a.seats);
+  showCards();
+}
+
+function hideExpensive() {
+  cars = cars.filter(car => car.msrp <= 50000);
+  showCards();
 }
