@@ -1,28 +1,5 @@
-/**
- * Data Catalog Project Starter Code - SEA Stage 2
- *
- * This file is where you should be doing most of your work. You should
- * also make changes to the HTML and CSS files, but we want you to prioritize
- * demonstrating your understanding of data structures, and you'll do that
- * with the JavaScript code you write in this file.
- *
- * The comments in this file are only to help you learn how the starter code
- * works. The instructions for the project are in the README. That said, here
- * are the three things you should do first to learn about the starter code:
- * - 1 - Change something small in index.html or style.css, then reload your
- *    browser and make sure you can see that change.
- * - 2 - On your browser, right click anywhere on the page and select
- *    "Inspect" to open the browser developer tools. Then, go to the "console"
- *    tab in the new window that opened up. This console is where you will see
- *    JavaScript errors and logs, which is extremely helpful for debugging.
- *    (These instructions assume you're using Chrome, opening developer tools
- *    may be different on other browsers. We suggest using Chrome.)
- * - 3 - Add another string to the titles array a few lines down. Reload your
- *    browser and observe what happens. You should see a fourth "card" appear
- *    with the string you added to the array, but a broken image.
- *
- */
-
+// Made by Nyan
+// Based on recent data by IRS and fueleconomy.gov, might become outdated with recent adminstration changes to tax credits :)
 
 let cars = [
   {
@@ -154,23 +131,21 @@ let cars = [
 
 function showCards() {
   const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";                       // clear any existing cards
+  cardContainer.innerHTML = "";                     
   const templateCard = document.querySelector(".card");
   for (let i = 0; i < cars.length; i++) {
     const car = cars[i];
-    const nextCard = templateCard.cloneNode(true);    // copy the hidden template
-    editCardContent(nextCard, car);                   // fill it with car data
-    cardContainer.appendChild(nextCard);              // add the card to the page
+    const nextCard = templateCard.cloneNode(true);   
+    editCardContent(nextCard, car);                  
+    cardContainer.appendChild(nextCard);             
   }
 }
 
 function editCardContent(card, carData) {
-  card.style.display = "block";  // make the cloned card visible
+  card.style.display = "block"; 
 
-  // Set the title
   card.querySelector("h2").textContent = carData.model;
 
-  // Set the image source and alt text
   const cardImage = card.querySelector("img");
   cardImage.src = carData.image;
   cardImage.alt = carData.model + " Photo";
@@ -181,11 +156,8 @@ function editCardContent(card, carData) {
   bulletPoints[1].textContent = "Range: " + carData.range + " miles";
   bulletPoints[2].textContent = "Maximum Capacity: " + carData.seats;
 }
-// This calls the addCards() function when the page is first loaded
 document.addEventListener("DOMContentLoaded", showCards);
 
-
-// Sort functions 
 function sortByPrice() {
   cars.sort((a, b) => a.msrp - b.msrp);
   showCards();
